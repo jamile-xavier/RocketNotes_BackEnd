@@ -2,13 +2,16 @@ const { Router } = require("express");
 const multer = require("multer");
 const uploadConfig = require("../configs/upload");
 
+//importação de controllers
 const UsersController = require("../controllers/UsersController");
 const UserAvatarController = require("../controllers/UserAvatarController");
+
 const ensureAuthenticated = require("../middlewares/ensureAuthenticated");
 
 const usersRoutes = Router();
 const upload = multer(uploadConfig.MULTER);
 
+// instanciar os controllers
 const usersController = new UsersController();
 const userAvatarController = new UserAvatarController();
 
@@ -21,4 +24,5 @@ usersRoutes.patch(
   userAvatarController.update
 );
 
+//exportar o arquivo para ser usado pela API
 module.exports = usersRoutes;

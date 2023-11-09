@@ -1,9 +1,23 @@
+//criptografia de senha
 const { hash, compare } = require("bcryptjs");
+
+//importação classe de erro
 const AppError = require("../utils/AppError");
+
 const UserRepository = require("../repositories/UserRepository");
 
+// conexão sqlite
 const sqliteConnection = require("../database/sqlite");
+
 const { UserCreateService } = require("../services/UserCreateService");
+
+/* Métodos que uma classe pode ter:
+ * index - GET para listar vários registros
+ * show - GET para exibibr um registro específico.
+ * create - POST para criar um registro.
+ * update - PUT para atualizar um registro.
+ * delete - DELETE para remover um registro.
+ */
 
 class UsersController {
   async create(request, response) {
