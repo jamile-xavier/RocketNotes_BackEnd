@@ -46,11 +46,16 @@ class UsersController {
       [email]
     );
 
+    //verificar se o e-mail já está sendo utilizado por ele ou outra pessoa
     if (userWithUpdateEmail && userWithUpdateEmail.id !== user.id) {
       throw new AppError("Este e-mail já está em uso.");
     }
+
+    // verificação se houve alteração, caso não ocorra manter o registrdo.
     user.name = name ?? user.name;
     user.email = email ?? user.email;
+
+    //validações de senha
 
     if (password && !old_password) {
       throw new AppError(

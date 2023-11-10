@@ -6,18 +6,22 @@ class NotesController {
     const { title, description, tags, links } = request.body;
     const user_id = request.user.id;
 
+    //recuperar o id da nota cadastrada
     const [note_id] = await knex("notes").insert({
       title,
       description,
       user_id,
     });
 
+    //percorrer cada link para inserir na nota
     const linksInsert = links.map((link) => {
       return {
-        note_id,
-        url: link,
+        note_id, //código da nota
+        url: link, //criando um objeto novo mudando de link para url
       };
     });
+
+    //inserir no banco de dados
     await knex("links").insert(linksInsert);
 
     const tagsInsert = tags.map((name) => {
@@ -62,16 +66,18 @@ class NotesController {
     let notes;
 
     if (tags) {
+      //filterTags → vetor para verificar se a tag existe ou não
       const filterTags = tags.split(",").map((tag) => tag.trim());
 
       notes = await knex("tags")
+        // select -> informar quais campos desejo selecionar na tabela
         .select(["notes.id", "notes.title", "notes.user_id"])
         .where("notes.user_id", user_id)
         .whereLike("notes.title", `%${title}%`)
-        .whereIn("name", filterTags)
+        .whereIn("name", filterTags) // pesquisa baseada nas tags
         .innerJoin("notes", "notes.id", "tags.note_id")
         .groupBy("notes.id")
-        .orderBy("movie_notes.title");
+        .orderBy("notes.title");
     } else {
       notes = await knex("notes")
         .where({ user_id })

@@ -7,7 +7,7 @@ exports.up = (knex) =>
       .integer("note_id")
       .references("id")
       .inTable("notes")
-      .onDelete("CASCADE");
+      .onDelete("CASCADE"); //se eu deletar a nota as tags vinculadas a ela serão deletadas também
     table.integer("user_id").references("id").inTable("users");
   });
 
