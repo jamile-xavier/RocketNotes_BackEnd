@@ -6,6 +6,7 @@ const uploadConfig = require("../configs/upload");
 const UsersController = require("../controllers/UsersController");
 const UserAvatarController = require("../controllers/UserAvatarController");
 
+//importação do middleware de autenticação
 const ensureAuthenticated = require("../middlewares/ensureAuthenticated");
 
 const usersRoutes = Router();
@@ -17,6 +18,7 @@ const userAvatarController = new UserAvatarController();
 
 usersRoutes.post("/", usersController.create);
 usersRoutes.put("/", ensureAuthenticated, usersController.update);
+//patch atualizar um arquivo, put atualizar vários arquivos
 usersRoutes.patch(
   "/avatar",
   ensureAuthenticated,

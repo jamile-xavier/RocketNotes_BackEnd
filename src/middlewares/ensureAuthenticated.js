@@ -1,14 +1,17 @@
+//função do json webtoken
 const { verify } = require("jsonwebtoken");
+
 const AppError = require("../utils/AppError");
 const authConfig = require("../configs/auth");
 
 function ensureAuthenticated(request, response, next) {
+  //onde está o token
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
-    throw new AppError("JWT Token naõ informado", 401);
+    throw new AppError("JWT Token não informado", 401);
   }
-  const [, token] = authHeader.split(" ");
+  const [, /*bearer*/ token] = authHeader.split(" "); /* Bearer xxxxxx(token)*/
 
   try {
     const { sub: user_id } = verify(token, authConfig.jwt.secret);

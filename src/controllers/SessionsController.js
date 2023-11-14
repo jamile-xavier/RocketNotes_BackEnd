@@ -2,6 +2,8 @@ const knex = require("../database/knex");
 const AppError = require("../utils/AppError");
 const { compare } = require("bcryptjs");
 const authConfig = require("../configs/auth");
+
+//é um método do json webtoken
 const { sign } = require("jsonwebtoken");
 
 class SessionController {
@@ -18,8 +20,10 @@ class SessionController {
 
     if (!passwordMatched) {
       throw new AppError("E-mail e/ou senha incorreta", 401);
+      // mensagem de erro é a mesma para usuário ou senha para dificultar a tentativa de acesso de pessoa que não seja o usuário da conta
     }
 
+    //devolução do token junto com o usuário
     const { secret, expiresIn } = authConfig.jwt;
     const token = sign({}, secret, {
       subject: String(user.id),

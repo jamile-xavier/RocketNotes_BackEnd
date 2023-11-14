@@ -1,5 +1,6 @@
 const { Router } = require("express");
 
+//importação de rotas
 const usersRouter = require("./users.routes");
 const notesRouter = require("./notes.routes");
 const tagsRouter = require("./tags.routes");
