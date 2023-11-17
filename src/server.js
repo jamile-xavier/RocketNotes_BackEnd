@@ -1,3 +1,4 @@
+//lidar com dados sensíveis
 require("dotenv/config");
 
 //importação express async errors
@@ -50,6 +51,6 @@ app.use((error, request, response, next) => {
 });
 
 // Informar ao express a porta que será utilizada
-const PORT = /*process.env.SERVER_PORT ||*/ 3333;
+const PORT = process.env.SERVER_PORT || 3333;
 //Mensagem que aparecerá ao iniciar a aplicação
 app.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
