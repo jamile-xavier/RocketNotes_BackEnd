@@ -1,7 +1,3 @@
-<div align="center">
-<img src="./src/assets/Logo.svg" alt= "Logo do Food Explorer">
-</div>
-
 <h1 align="center"> ROCKETNOTES - BACK END </h1>
 
 ## Descrição do Projeto
